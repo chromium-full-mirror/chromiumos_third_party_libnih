@@ -7,7 +7,6 @@ my_async_method_reply (NihDBusMessage *message,
 	DBusMessageIter output_iter;
 
 	nih_assert (message != NULL);
-	nih_assert (output != NULL);
 
 	/* If the sender doesn't care about a reply, don't bother wasting
 	 * effort constructing and sending one.
