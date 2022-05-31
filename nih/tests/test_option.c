@@ -1578,7 +1578,7 @@ test_version (void)
 
 				args = nih_option_parser (NULL, argc, argv,
 							  options, FALSE);
-				exit (1);
+				assert (! "not reached");
 			}
 		}
 
@@ -1592,7 +1592,6 @@ test_version (void)
 		TEST_FILE_EQ (output, "Copyright Message\n");
 		TEST_FILE_EQ (output, "\n");
 		TEST_FILE_EQ_N (output, "This is free software;");
-		TEST_FILE_EQ_N (output, "warranty; not even for");
 		TEST_FILE_END (output);
 
 		fclose (output);
@@ -1656,7 +1655,7 @@ test_help (void)
 
 				args = nih_option_parser (NULL, argc, argv,
 							  options, FALSE);
-				exit (1);
+				assert (! "not reached");
 			}
 		}
 
