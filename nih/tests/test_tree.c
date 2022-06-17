@@ -1357,7 +1357,7 @@ my_filter (NihTree **nodes,
 	if (node == nodes['l' - 97])
 		return TRUE;
 
-	assert ("not reached");
+	assert (! "not reached");
 	return TRUE;
 }
 
