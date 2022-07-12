@@ -1592,7 +1592,6 @@ test_version (void)
 		TEST_FILE_EQ (output, "Copyright Message\n");
 		TEST_FILE_EQ (output, "\n");
 		TEST_FILE_EQ_N (output, "This is free software;");
-		TEST_FILE_END (output);
 
 		fclose (output);
 	}
