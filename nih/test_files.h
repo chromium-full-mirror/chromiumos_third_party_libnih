@@ -35,6 +35,12 @@
 #include <fnmatch.h>
 
 
+/* Allow tests to redirect this to their own favorite temporary directory. */
+#ifndef LIBNIH_TEMPDIR
+#define LIBNIH_TEMPDIR "/tmp"
+#endif
+
+
 /**
  * TEST_FILENAME:
  * @_var: variable to store filename in.
@@ -45,7 +51,8 @@
  **/
 #define TEST_FILENAME(_var) \
 	do { \
-		snprintf ((_var), sizeof (_var), "/tmp/%s-%s-%d-%d", \
+		snprintf ((_var), sizeof (_var), "%s/%s-%s-%d-%d", \
+			  LIBNIH_TEMPDIR, \
 			  strrchr (__FILE__, '/') ? strrchr (__FILE__, '/') + 1 : __FILE__, \
 			  __FUNCTION__, __LINE__, getpid ()); \
 		unlink (_var); \
