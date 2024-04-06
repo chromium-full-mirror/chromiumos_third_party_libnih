@@ -93,9 +93,9 @@ test_new (void)
 		}
 
 		TEST_ALLOC_SIZE (hash, sizeof(NihHash));
-		TEST_EQ_P (hash->key_function, my_key_function);
-		TEST_EQ_P (hash->hash_function, my_hash_function);
-		TEST_EQ_P (hash->cmp_function, my_cmp_function);
+		TEST_EQ_P (hash->key_function, &my_key_function);
+		TEST_EQ_P (hash->hash_function, &my_hash_function);
+		TEST_EQ_P (hash->cmp_function, &my_cmp_function);
 
 		TEST_EQ (hash->size, 17);
 		TEST_NE_P (hash->bins, NULL);

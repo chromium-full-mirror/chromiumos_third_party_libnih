@@ -3486,7 +3486,7 @@ test_proxy_get_function (void)
 		TEST_EQ_P (last_pending_data->handler,
 			   (NihDBusReplyHandler)my_blank_get_handler);
 		TEST_EQ_P (last_pending_data->error_handler,
-			   my_blank_error_handler);
+			   &my_blank_error_handler);
 		TEST_EQ_P (last_pending_data->data, &proxy);
 
 		/* Make sure the pending data is freed along with the
@@ -3597,7 +3597,7 @@ test_proxy_get_function (void)
 		TEST_EQ_P (last_pending_data->handler,
 			   (NihDBusReplyHandler)my_blank_get_handler);
 		TEST_EQ_P (last_pending_data->error_handler,
-			   my_blank_error_handler);
+			   &my_blank_error_handler);
 		TEST_EQ_P (last_pending_data->data, &proxy);
 
 		/* Make sure the pending data is freed along with the
@@ -3697,7 +3697,7 @@ test_proxy_get_function (void)
 		TEST_EQ_P (last_pending_data->handler,
 			   (NihDBusReplyHandler)my_blank_get_handler);
 		TEST_EQ_P (last_pending_data->error_handler,
-			   my_blank_error_handler);
+			   &my_blank_error_handler);
 		TEST_EQ_P (last_pending_data->data, &proxy);
 
 		/* Make sure the pending data is freed along with the
@@ -3805,7 +3805,7 @@ test_proxy_get_function (void)
 		TEST_EQ_P (last_pending_data->handler,
 			   (NihDBusReplyHandler)my_blank_get_handler);
 		TEST_EQ_P (last_pending_data->error_handler,
-			   my_blank_error_handler);
+			   &my_blank_error_handler);
 		TEST_EQ_P (last_pending_data->data, &proxy);
 
 		/* Make sure the pending data is freed along with the
@@ -5902,7 +5902,7 @@ test_proxy_set_function (void)
 		TEST_EQ_P (last_pending_data->handler,
 			   (NihDBusReplyHandler)my_blank_set_handler);
 		TEST_EQ_P (last_pending_data->error_handler,
-			   my_blank_error_handler);
+			   &my_blank_error_handler);
 		TEST_EQ_P (last_pending_data->data, &proxy);
 
 		/* Make sure the pending data is freed along with the
@@ -6025,7 +6025,7 @@ test_proxy_set_function (void)
 		TEST_EQ_P (last_pending_data->connection, client_conn);
 		TEST_EQ_P (last_pending_data->handler, NULL);
 		TEST_EQ_P (last_pending_data->error_handler,
-			   my_blank_error_handler);
+			   &my_blank_error_handler);
 		TEST_EQ_P (last_pending_data->data, &proxy);
 
 		/* Make sure the pending data is freed along with the
@@ -6245,7 +6245,7 @@ test_proxy_set_function (void)
 		TEST_EQ_P (last_pending_data->handler,
 			   (NihDBusReplyHandler)my_blank_set_handler);
 		TEST_EQ_P (last_pending_data->error_handler,
-			   my_blank_error_handler);
+			   &my_blank_error_handler);
 		TEST_EQ_P (last_pending_data->data, &proxy);
 
 		/* Make sure the pending data is freed along with the
@@ -6358,7 +6358,7 @@ test_proxy_set_function (void)
 		TEST_EQ_P (last_pending_data->handler,
 			   (NihDBusReplyHandler)my_blank_set_handler);
 		TEST_EQ_P (last_pending_data->error_handler,
-			   my_blank_error_handler);
+			   &my_blank_error_handler);
 		TEST_EQ_P (last_pending_data->data, &proxy);
 
 		/* Make sure the pending data is freed along with the
@@ -6479,7 +6479,7 @@ test_proxy_set_function (void)
 		TEST_EQ_P (last_pending_data->handler,
 			   (NihDBusReplyHandler)my_blank_set_handler);
 		TEST_EQ_P (last_pending_data->error_handler,
-			   my_blank_error_handler);
+			   &my_blank_error_handler);
 		TEST_EQ_P (last_pending_data->data, &proxy);
 
 		/* Make sure the pending data is freed along with the

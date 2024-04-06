@@ -54,7 +54,7 @@ test_set_handler (void)
 	TEST_EQ (ret, 0);
 
 	sigaction (SIGUSR1, NULL, &act);
-	TEST_EQ_P (act.sa_handler, my_sig_handler);
+	TEST_EQ_P (act.sa_handler, &my_sig_handler);
 	TEST_TRUE (act.sa_flags & SA_RESTART);
 	TEST_FALSE (act.sa_flags & SA_RESETHAND);
 
@@ -222,7 +222,7 @@ test_add_handler (void)
 		TEST_ALLOC_SIZE (signal, sizeof (NihSignal));
 		TEST_LIST_NOT_EMPTY (&signal->entry);
 		TEST_EQ (signal->signum, SIGUSR1);
-		TEST_EQ_P (signal->handler, my_handler);
+		TEST_EQ_P (signal->handler, &my_handler);
 		TEST_EQ_P (signal->data, &signal);
 
 		nih_free (signal);

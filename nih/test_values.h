@@ -71,9 +71,13 @@
  * to ssize_t for display purposes.
  **/
 #define TEST_EQ(_a, _b) \
-	if ((_a) != (_b)) \
+{ \
+	const typeof(_a) __a = (_a); \
+	const typeof(_b) __b = (_b); \
+	if ((__a) != (__b)) \
 		TEST_FAILED ("wrong value for %s, expected %zi got %zi", \
-			     #_a, (ssize_t)(_b), (ssize_t)(_a))
+			     #_a, (ssize_t)(__b), (ssize_t)(__a)); \
+}
 
 /**
  * TEST_EQ_U:
@@ -84,9 +88,13 @@
  * to size_t for display purposes.
  **/
 #define TEST_EQ_U(_a, _b) \
+{ \
+	const typeof(_a) __a = (_a); \
+	const typeof(_b) __b = (_b); \
 	if ((_a) != (_b)) \
 		TEST_FAILED ("wrong value for %s, expected %zu got %zu", \
-			     #_a, (size_t)(_b), (size_t)(_a))
+			     #_a, (size_t)(_b), (size_t)(_a)); \
+}
 
 /**
  * TEST_EQ_P:
@@ -96,9 +104,13 @@
  * Check that the two pointers @_a and @_b are equal.
  **/
 #define TEST_EQ_P(_a, _b) \
-	if ((_a) != (_b)) \
+{ \
+	const typeof(_a) __a = (_a); \
+	const typeof(_b) __b = (_b); \
+	if ((__a) != (__b)) \
 		TEST_FAILED ("wrong value for %s, expected %p got %p", \
-			     #_a, (_b), (_a))
+			     #_a, (__b), (__a)); \
+}
 
 /**
  * TEST_EQ_STR:
@@ -108,12 +120,14 @@
  * Check that the two strings @_a and @_b are equal.
  **/
 #define TEST_EQ_STR(_a, _b) \
+{ \
 	if ((_a) == NULL) {						\
 		TEST_FAILED ("wrong value for %s, expected '%s' got NULL", \
 			     #_a, (_b));				\
 	} else if (strcmp ((_a), (_b)))					\
 		TEST_FAILED ("wrong value for %s, expected '%s' got '%s'", \
-			     #_a, (_b), (_a))
+			     #_a, (_b), (_a));				\
+}
 
 /**
  * TEST_EQ_STRN:
@@ -124,13 +138,15 @@
  * the second string.
  **/
 #define TEST_EQ_STRN(_a, _b) \
+{ \
 	if ((_a) == NULL) {						\
 		TEST_FAILED ("wrong value for %s, expected '%.*s' got NULL", \
 			     #_a, (int)strlen (_b), (_b));		\
 	} else if (strncmp ((_a), (_b), strlen (_b)))			\
 		TEST_FAILED ("wrong value for %s, expected '%.*s' got '%.*s'", \
 			     #_a, (int)strlen (_b), (_b),		\
-			     (int)strlen (_b), (_a))
+			     (int)strlen (_b), (_a));			\
+}
 
 /**
  * TEST_EQ_MEM:
@@ -142,12 +158,14 @@
  * identical.
  **/
 #define TEST_EQ_MEM(_a, _b, _l) \
+{ \
 	if ((_a) == NULL) {						\
 		TEST_FAILED ("wrong value for %s, got unexpected NULL",	\
 			     #_a);					\
 	} else if (memcmp ((_a), (_b), (_l)))				\
 		TEST_FAILED ("wrong %zu bytes at %p (%s), expected %p (%s)", \
-			     (size_t)(_l), (_a), #_a, (_b), #_b)
+			     (size_t)(_l), (_a), #_a, (_b), #_b);	\
+}
 
 /**
  * TEST_NE:
@@ -158,49 +176,65 @@
  * cast to ssize_t for display purposes.
  **/
 #define TEST_NE(_a, _b) \
-	if ((_a) == (_b)) \
+{ \
+	const typeof(_a) __a = (_a); \
+	const typeof(_b) __b = (_b); \
+	if ((__a) == (__b)) \
 		TEST_FAILED ("wrong value for %s, got unexpected %zi", \
-			     #_a, (ssize_t)(_b))
+			     #_a, (ssize_t)(__b)); \
+}
 
 /**
  * TEST_NE_U:
- * @_a: first unsigned integer,
+ * @__a: first unsigned integer,
  * @_b: second unsigned integer.
  *
  * Check that the two numeric values @_a and @_b are not equal, they are
  * cast to size_t for display purposes.
  **/
 #define TEST_NE_U(_a, _b) \
-	if ((_a) == (_b)) \
+{ \
+	const typeof(_a) __a = (_a); \
+	const typeof(_b) __b = (_b); \
+	if ((__a) == (__b)) \
 		TEST_FAILED ("wrong value for %s, got unexpected %zu", \
-			     #_a, (size_t)(_b))
+			     #_a, (size_t)(__b)); \
+}
 
 /**
  * TEST_NE_P:
- * @_a: first pointer,
+ * @__a: first pointer,
  * @_b: second pointer.
  *
  * Check that the two pointers @_a and @_b are not equal.
  **/
 #define TEST_NE_P(_a, _b) \
-	if ((_a) == (_b)) \
+{ \
+	const typeof(_a) __a = (_a); \
+	const typeof(_b) __b = (_b); \
+	if ((__a) == (__b)) \
 		TEST_FAILED ("wrong value for %s, got unexpected %p", \
-			     #_a, (_b))
+			     #_a, (__b)); \
+}
 
 /**
  * TEST_NE_STR:
- * @_a: first string,
+ * @__a: first string,
  * @_b: second string.
  *
  * Check that the two strings @_a and @_b are not equal.
  **/
 #define TEST_NE_STR(_a, _b) \
-	if ((_a) == NULL) {						\
+{ \
+	const typeof(_a) __a = (_a); \
+	const typeof(_b) __b = (_b); \
+	if ((__a) == NULL) {						\
 		TEST_FAILED ("wrong value for %s, expected string got NULL", \
 			     #_a);					\
-	} else if (! strcmp ((_a), (_b)))				\
+	} else if (! strcmp ((__a), (__b)))				\
 		TEST_FAILED ("wrong value for %s, got unexpected '%s'", \
-			     #_a, (_b))
+			     #_a, (__b));				\
+}
 
 /**
  * TEST_NE_STRN:
@@ -211,12 +245,16 @@
  * of the second string.
  **/
 #define TEST_NE_STRN(_a, _b) \
-	if ((_a) == NULL) {						\
+{ \
+	const typeof(_a) __a = (_a); \
+	const typeof(_b) __b = (_b); \
+	if ((__a) == NULL) {						\
 		TEST_FAILED ("wrong value for %s, got unexpected NULL",	\
 			     #_a);					\
-	} else if (! strncmp ((_a), (_b), strlen (_b)))			\
+	} else if (! strncmp ((__a), (__b), strlen (__b)))		\
 		TEST_FAILED ("wrong value for %s, got unexpected '%.*s'", \
-			     #_a, (int)strlen (_b), (_b))
+			     #_a, (int)strlen (__b), (__b));		\
+}
 
 /**
  * TEST_NE_MEM:
@@ -228,12 +266,17 @@
  * different.
  **/
 #define TEST_NE_MEM(_a, _b, _l) \
-	if ((_a) == NULL) {						\
+{ \
+	const typeof(_a) __a = (_a); \
+	const typeof(_b) __b = (_b); \
+	const typeof(_l) __l = (_l); \
+	if ((__a) == NULL) {						\
 		TEST_FAILED ("wrong value for %s, got unexpected NULL",	\
 			     #_a);					\
-	} else if (! memcmp ((_a), (_b), (_l)))				\
+	} else if (! memcmp ((__a), (__b), (__l)))			\
 		TEST_FAILED ("wrong %zu bytes at %p (%s), got unexpected %p (%s)", \
-			     (size_t)(_l), (_a), #_a, (_b), #_b)
+			     (size_t)(__l), (__a), #_a, (__b), #_b);	\
+}
 
 /**
  * TEST_LT:
@@ -244,9 +287,13 @@
  * they are cast to ssize_t for display purposes.
  **/
 #define TEST_LT(_a, _b) \
-	if ((_a) >= (_b)) \
+{ \
+	const typeof(_a) __a = (_a); \
+	const typeof(_b) __b = (_b); \
+	if ((__a) >= (__b)) \
 		TEST_FAILED ("wrong value for %s, expected less than %zi got %zi", \
-			     #_a, (ssize_t)(_b), (ssize_t)(_a))
+			     #_a, (ssize_t)(__b), (ssize_t)(__a)); \
+}
 
 /**
  * TEST_LE:
@@ -257,9 +304,13 @@
  * value @_b, they are cast to ssize_t for display purposes.
  **/
 #define TEST_LE(_a, _b) \
-	if ((_a) > (_b)) \
+{ \
+	const typeof(_a) __a = (_a); \
+	const typeof(_b) __b = (_b); \
+	if ((__a) > (__b)) \
 		TEST_FAILED ("wrong value for %s, expected %zi or lower got %zi", \
-			     #_a, (ssize_t)(_b), (ssize_t)(_a))
+			     #_a, (ssize_t)(__b), (ssize_t)(__a)); \
+}
 
 /**
  * TEST_GT:
@@ -270,9 +321,13 @@
  * they are cast to ssize_t for display purposes.
  **/
 #define TEST_GT(_a, _b) \
-	if ((_a) <= (_b)) \
+{ \
+	const typeof(_a) __a = (_a); \
+	const typeof(_b) __b = (_b); \
+	if ((__a) <= (__b)) \
 		TEST_FAILED ("wrong value for %s, expected greater than %zi got %zi", \
-			     #_a, (ssize_t)(_b), (ssize_t)(_a))
+			     #_a, (ssize_t)(__b), (ssize_t)(__a)); \
+}
 
 /**
  * TEST_GE:
@@ -283,8 +338,12 @@
  * value @_b, they are cast to ssize_t for display purposes.
  **/
 #define TEST_GE(_a, _b) \
-	if ((_a) < (_b)) \
+{ \
+	const typeof(_a) __a = (_a); \
+	const typeof(_b) __b = (_b); \
+	if ((__a) < (__b)) \
 		TEST_FAILED ("wrong value for %s, expected %zi or greater got %zi", \
-			     #_a, (ssize_t)(_b), (ssize_t)(_a))
+			     #_a, (ssize_t)(__b), (ssize_t)(__a)); \
+}
 
 #endif /* NIH_TEST_VALUES_H */

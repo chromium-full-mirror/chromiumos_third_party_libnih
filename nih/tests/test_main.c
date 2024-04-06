@@ -503,7 +503,7 @@ test_main_loop_add_func (void)
 
 		TEST_ALLOC_SIZE (func, sizeof (NihMainLoopFunc));
 		TEST_LIST_NOT_EMPTY (&func->entry);
-		TEST_EQ_P (func->callback, my_callback);
+		TEST_EQ_P (func->callback, &my_callback);
 		TEST_EQ_P (func->data, &func);
 
 		nih_free (func);

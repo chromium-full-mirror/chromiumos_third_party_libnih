@@ -2431,7 +2431,7 @@ test_parse_stanza (void)
 
 	TEST_TRUE (handler_called);
 	TEST_EQ_P (last_data, &ret);
-	TEST_EQ_P (last_file, buf);
+	TEST_EQ_P (last_file, &buf[0]);
 	TEST_EQ (last_len, strlen (buf));
 	TEST_EQ (last_pos, 4);
 	TEST_EQ (last_lineno, (size_t)-1);
@@ -2458,7 +2458,7 @@ test_parse_stanza (void)
 
 	TEST_TRUE (handler_called);
 	TEST_EQ_P (last_data, &ret);
-	TEST_EQ_P (last_file, buf);
+	TEST_EQ_P (last_file, &buf[0]);
 	TEST_EQ (last_len, strlen (buf));
 	TEST_EQ (last_pos, 10);
 	TEST_EQ (last_lineno, (size_t)-1);
@@ -2487,7 +2487,7 @@ test_parse_stanza (void)
 
 	TEST_TRUE (handler_called);
 	TEST_EQ_P (last_data, &ret);
-	TEST_EQ_P (last_file, buf);
+	TEST_EQ_P (last_file, &buf[0]);
 	TEST_EQ (last_len, strlen (buf));
 	TEST_EQ (last_pos, 4);
 	TEST_EQ (last_lineno, 1);
@@ -2538,7 +2538,7 @@ test_parse_stanza (void)
 
 	TEST_TRUE (handler_called);
 	TEST_EQ_P (last_data, &ret);
-	TEST_EQ_P (last_file, buf);
+	TEST_EQ_P (last_file, &buf[0]);
 	TEST_EQ (last_len, strlen (buf));
 	TEST_EQ (last_pos, 7);
 	TEST_EQ (last_lineno, (size_t)-1);
@@ -2605,7 +2605,7 @@ test_parse_file (void)
 
 	TEST_EQ (handler_called, 2);
 	TEST_EQ_P (last_data, &buf);
-	TEST_EQ_P (last_file, buf);
+	TEST_EQ_P (last_file, &buf[0]);
 	TEST_EQ (last_len, strlen (buf));
 	TEST_EQ (last_pos, 17);
 	TEST_EQ (last_lineno, 2);
@@ -2634,7 +2634,7 @@ test_parse_file (void)
 
 	TEST_EQ (handler_called, 2);
 	TEST_EQ_P (last_data, &buf);
-	TEST_EQ_P (last_file, buf);
+	TEST_EQ_P (last_file, &buf[0]);
 	TEST_EQ (last_len, strlen (buf));
 	TEST_EQ (last_pos, 31);
 	TEST_EQ (last_lineno, 2);
@@ -2661,7 +2661,7 @@ test_parse_file (void)
 
 	TEST_EQ (handler_called, 2);
 	TEST_EQ_P (last_data, &buf);
-	TEST_EQ_P (last_file, buf);
+	TEST_EQ_P (last_file, &buf[0]);
 	TEST_EQ (last_len, strlen (buf));
 	TEST_EQ (last_pos, 27);
 	TEST_EQ (last_lineno, 2);
@@ -2688,7 +2688,7 @@ test_parse_file (void)
 
 	TEST_EQ (handler_called, 2);
 	TEST_EQ_P (last_data, &buf);
-	TEST_EQ_P (last_file, buf);
+	TEST_EQ_P (last_file, &buf[0]);
 	TEST_EQ (last_len, strlen (buf));
 	TEST_EQ (last_pos, 18);
 	TEST_EQ (last_lineno, 3);
@@ -2715,7 +2715,7 @@ test_parse_file (void)
 
 	TEST_EQ (handler_called, 2);
 	TEST_EQ_P (last_data, &buf);
-	TEST_EQ_P (last_file, buf);
+	TEST_EQ_P (last_file, &buf[0]);
 	TEST_EQ (last_len, strlen (buf));
 	TEST_EQ (last_pos, 23);
 	TEST_EQ (last_lineno, 3);
@@ -2742,7 +2742,7 @@ test_parse_file (void)
 
 	TEST_EQ (handler_called, 2);
 	TEST_EQ_P (last_data, &buf);
-	TEST_EQ_P (last_file, buf);
+	TEST_EQ_P (last_file, &buf[0]);
 	TEST_EQ (last_len, strlen (buf));
 	TEST_EQ (last_pos, 25);
 	TEST_EQ (last_lineno, 3);
@@ -2771,7 +2771,7 @@ test_parse_file (void)
 
 	TEST_EQ (handler_called, 2);
 	TEST_EQ_P (last_data, &buf);
-	TEST_EQ_P (last_file, buf);
+	TEST_EQ_P (last_file, &buf[0]);
 	TEST_EQ (last_len, strlen (buf));
 	TEST_EQ (last_pos, 30);
 	TEST_EQ (last_lineno, 3);
@@ -2802,7 +2802,7 @@ test_parse_file (void)
 
 	TEST_EQ (handler_called, 1);
 	TEST_EQ_P (last_data, &buf);
-	TEST_EQ_P (last_file, buf);
+	TEST_EQ_P (last_file, &buf[0]);
 	TEST_EQ (last_len, strlen (buf));
 	TEST_EQ (last_pos, 6);
 	TEST_EQ (last_lineno, 1);

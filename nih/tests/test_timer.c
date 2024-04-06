@@ -69,7 +69,7 @@ test_add_timeout (void)
 		TEST_GE (timer->due, t1.tv_sec + 10);
 		TEST_LE (timer->due, t2.tv_sec + 10);
 		TEST_EQ (timer->timeout, 10);
-		TEST_EQ_P (timer->callback, my_callback);
+		TEST_EQ_P (timer->callback, &my_callback);
 		TEST_EQ_P (timer->data, &timer);
 
 		/* Check that the timer is the next one due. */
@@ -107,7 +107,7 @@ test_add_periodic (void)
 		TEST_GE (timer->due, t1.tv_sec + 25);
 		TEST_LE (timer->due, t2.tv_sec + 25);
 		TEST_EQ (timer->timeout, 25);
-		TEST_EQ_P (timer->callback, my_callback);
+		TEST_EQ_P (timer->callback, &my_callback);
 		TEST_EQ_P (timer->data, &timer);
 
 		/* Check that the timer is the next one due. */
@@ -152,7 +152,7 @@ test_add_scheduled (void)
 		TEST_EQ (timer->schedule.mdays, schedule.mdays);
 		TEST_EQ (timer->schedule.months, schedule.months);
 		TEST_EQ (timer->schedule.wdays, schedule.wdays);
-		TEST_EQ_P (timer->callback, my_callback);
+		TEST_EQ_P (timer->callback, &my_callback);
 		TEST_EQ_P (timer->data, &timer);
 
 		/* Check that the timer is the next one due. */

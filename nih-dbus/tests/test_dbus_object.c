@@ -393,7 +393,7 @@ test_object_new (void)
 
 		TEST_EQ_P (object->connection, conn);
 		TEST_EQ_P (object->data, &object);
-		TEST_EQ_P (object->interfaces, all_interfaces);
+		TEST_EQ_P (object->interfaces, &all_interfaces[0]);
 		TEST_EQ (object->registered, TRUE);
 
 		TEST_TRUE (dbus_connection_get_object_path_data (

@@ -91,7 +91,7 @@ test_add_watch (void)
 		TEST_ALLOC_SIZE (watch, sizeof (NihIoWatch));
 		TEST_EQ (watch->fd, fds[0]);
 		TEST_EQ (watch->events, NIH_IO_READ);
-		TEST_EQ_P (watch->watcher, my_watcher);
+		TEST_EQ_P (watch->watcher, &my_watcher);
 		TEST_EQ_P (watch->data, &watch);
 
 		nih_free (watch);
@@ -1221,9 +1221,9 @@ test_reopen (void)
 		TEST_ALLOC_PARENT (io->recv_buf, io);
 		TEST_ALLOC_SIZE (io->recv_buf, sizeof (NihIoBuffer));
 		TEST_EQ (io->type, NIH_IO_STREAM);
-		TEST_EQ_P (io->reader, my_reader);
-		TEST_EQ_P (io->close_handler, my_close_handler);
-		TEST_EQ_P (io->error_handler, my_error_handler);
+		TEST_EQ_P (io->reader, &my_reader);
+		TEST_EQ_P (io->close_handler, &my_close_handler);
+		TEST_EQ_P (io->error_handler, &my_error_handler);
 		TEST_EQ_P (io->data, &io);
 		TEST_FALSE (io->shutdown);
 		TEST_EQ_P (io->free, NULL);
@@ -1265,9 +1265,9 @@ test_reopen (void)
 		TEST_ALLOC_PARENT (io->recv_q, io);
 		TEST_ALLOC_SIZE (io->recv_q, sizeof (NihList));
 		TEST_EQ (io->type, NIH_IO_MESSAGE);
-		TEST_EQ_P (io->reader, my_reader);
-		TEST_EQ_P (io->close_handler, my_close_handler);
-		TEST_EQ_P (io->error_handler, my_error_handler);
+		TEST_EQ_P (io->reader, &my_reader);
+		TEST_EQ_P (io->close_handler, &my_close_handler);
+		TEST_EQ_P (io->error_handler, &my_error_handler);
 		TEST_EQ_P (io->data, &io);
 		TEST_FALSE (io->shutdown);
 		TEST_EQ_P (io->free, NULL);

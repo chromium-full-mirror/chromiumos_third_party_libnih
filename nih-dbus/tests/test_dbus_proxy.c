@@ -290,7 +290,7 @@ test_new (void)
 
 		TEST_TRUE (proxy->auto_start);
 
-		TEST_EQ_P (proxy->lost_handler, my_lost_handler);
+		TEST_EQ_P (proxy->lost_handler, &my_lost_handler);
 		TEST_EQ_P (proxy->data, conn);
 
 		/* Constructs the rule when we free */
@@ -832,7 +832,7 @@ test_connect (void)
 		TEST_EQ_P (proxied->proxy, proxy);
 		TEST_EQ_P (proxied->interface, &my_interface);
 		TEST_EQ_P (proxied->signal, &my_interface_signals[0]);
-		TEST_EQ_P (proxied->handler, my_signal_handler);
+		TEST_EQ_P (proxied->handler, &my_signal_handler);
 		TEST_EQ_P (proxied->data, NULL);
 
 		TEST_ALLOC_PARENT (proxied, proxy);
@@ -920,7 +920,7 @@ test_connect (void)
 		TEST_EQ_P (proxied->proxy, proxy);
 		TEST_EQ_P (proxied->interface, &my_interface);
 		TEST_EQ_P (proxied->signal, &my_interface_signals[0]);
-		TEST_EQ_P (proxied->handler, my_signal_handler);
+		TEST_EQ_P (proxied->handler, &my_signal_handler);
 		TEST_EQ_P (proxied->data, NULL);
 
 		TEST_ALLOC_PARENT (proxied, proxy);
@@ -1006,7 +1006,7 @@ test_connect (void)
 		TEST_EQ_P (proxied->proxy, proxy);
 		TEST_EQ_P (proxied->interface, &my_interface);
 		TEST_EQ_P (proxied->signal, &my_interface_signals[0]);
-		TEST_EQ_P (proxied->handler, my_signal_handler);
+		TEST_EQ_P (proxied->handler, &my_signal_handler);
 		TEST_EQ_P (proxied->data, NULL);
 
 		TEST_ALLOC_PARENT (proxied, proxy);

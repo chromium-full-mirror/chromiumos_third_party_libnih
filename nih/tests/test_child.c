@@ -83,7 +83,7 @@ test_add_watch (void)
 		TEST_ALLOC_SIZE (watch, sizeof (NihChildWatch));
 		TEST_EQ (watch->pid, getpid ());
 		TEST_EQ (watch->events, NIH_CHILD_EXITED);
-		TEST_EQ_P (watch->handler, my_handler);
+		TEST_EQ_P (watch->handler, &my_handler);
 		TEST_EQ_P (watch->data, &watch);
 		TEST_LIST_NOT_EMPTY (&watch->entry);
 
@@ -107,7 +107,7 @@ test_add_watch (void)
 		TEST_ALLOC_SIZE (watch, sizeof (NihChildWatch));
 		TEST_EQ (watch->pid, -1);
 		TEST_EQ (watch->events, NIH_CHILD_ALL);
-		TEST_EQ_P (watch->handler, my_handler);
+		TEST_EQ_P (watch->handler, &my_handler);
 		TEST_EQ_P (watch->data, &watch);
 		TEST_LIST_NOT_EMPTY (&watch->entry);
 
