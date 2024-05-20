@@ -23,13 +23,13 @@
 #include <sys/types.h>
 #include <sys/wait.h>
 
-#include <assert.h>
 #include <signal.h>
 #include <stdlib.h>
 #include <string.h>
 #include <unistd.h>
 
 #include <dbus/dbus.h>
+#include <nih/test.h>
 
 
 /**
@@ -49,27 +49,29 @@
 #define TEST_DBUS(_pid)							\
 	do {								\
 		int _test_fds[2];					\
-		assert0 (pipe (_test_fds));				\
-		assert ((_pid = fork ()) >= 0);				\
+		TEST_EQ (pipe (_test_fds), 0);				\
+		TEST_GE ((_pid = fork ()), 0);				\
 		if (_pid > 0) {						\
 			char _test_address[128] = { 0 };		\
 			close (_test_fds[1]);				\
-			assert (read (_test_fds[0], _test_address,	\
-				      sizeof (_test_address)) > 0);	\
+			TEST_GT (read (_test_fds[0], _test_address,	\
+				       sizeof (_test_address)), 0);	\
 			close (_test_fds[0]);				\
 									\
 			while (strrchr (_test_address, '\n'))		\
 				*(strrchr (_test_address, '\n')) = '\0'; \
 									\
-			assert0 (setenv ("DBUS_SYSTEM_BUS_ADDRESS",	\
-					 _test_address, TRUE));		\
-			assert0 (setenv ("DBUS_SESSION_BUS_ADDRESS",	\
-					 _test_address, TRUE));		\
+			TEST_EQ (setenv ("DBUS_SYSTEM_BUS_ADDRESS",	\
+					 _test_address, TRUE), 0);	\
+			TEST_EQ (setenv ("DBUS_SESSION_BUS_ADDRESS",	\
+					 _test_address, TRUE), 0);	\
 		} else if (_pid == 0) {					\
 			close (_test_fds[0]);				\
-			assert (dup2 (_test_fds[1], STDOUT_FILENO) >= 0); \
-			assert0 (execlp ("dbus-daemon", "test_dbus-daemon",	\
-					 "--session", "--print-address", NULL)); \
+			TEST_GE (dup2 (_test_fds[1], STDOUT_FILENO), 0); \
+			TEST_EQ (execlp ("dbus-daemon",			\
+					 "test_dbus-daemon",		\
+					 "--session",			\
+					 "--print-address", NULL), 0);	\
 			exit (255);					\
 		}							\
 	} while (0)
@@ -88,13 +90,13 @@
 	do {								\
 		DBusMessage *_test_message;				\
 									\
-		assert ((_conn = dbus_bus_get_private (DBUS_BUS_SYSTEM, NULL)) != NULL); \
+		TEST_NE_P ((_conn = dbus_bus_get_private (DBUS_BUS_SYSTEM, NULL)), NULL); \
 		dbus_connection_set_exit_on_disconnect (_conn, FALSE);	\
 									\
 		while (! (_test_message = dbus_connection_pop_message (_conn))) \
 			dbus_connection_read_write (_conn, -1);		\
 									\
-		assert (dbus_message_is_signal (			\
+		TEST_TRUE (dbus_message_is_signal (			\
 				_test_message, DBUS_INTERFACE_DBUS,	\
 				"NameAcquired"));			\
 									\
