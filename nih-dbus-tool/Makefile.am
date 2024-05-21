@@ -268,9 +268,6 @@ $(com_netsplit_Nih_Test_proxy_OUTPUTS): $(com_netsplit_Nih_Test_proxy_XML) $(bui
 
 # These have to be built sources because we can't compile test_*.o without
 # the header file existing first.
-BUILT_SOURCES = \
-	$(com_netsplit_Nih_Test_object_OUTPUTS) \
-	$(com_netsplit_Nih_Test_proxy_OUTPUTS)
 
 EXTRA_DIST = \
 	$(com_netsplit_Nih_Test_object_XML) \
