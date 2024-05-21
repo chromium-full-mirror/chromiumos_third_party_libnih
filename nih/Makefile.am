@@ -71,7 +71,7 @@ nihinclude_HEADERS = \
 	test_hash.h
 
 
-pkgconfigdir = $(prefix)/lib/pkgconfig
+pkgconfigdir = $(libdir)/pkgconfig
 pkgconfig_DATA = libnih.pc
 
 

@@ -49,7 +49,7 @@ nihdbusinclude_HEADERS = \
 	test_dbus.h
 
 
-pkgconfigdir = $(prefix)/lib/pkgconfig
+pkgconfigdir = $(libdir)/pkgconfig
 pkgconfig_DATA = libnih-dbus.pc
 
 
