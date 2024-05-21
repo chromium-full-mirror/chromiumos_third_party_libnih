@@ -23,12 +23,21 @@ AC_PROG_CC
 PKG_PROG_PKG_CONFIG([0.22])
 
 # Checks for libraries.
-PKG_CHECK_MODULES([DBUS], [dbus-1 >= 1.2.16])
-AC_CHECK_LIB([expat], [XML_ParserCreate],
+AC_ARG_WITH([dbus],
+  [AS_HELP_STRING([--without-dbus],
+    [disable support for dbus])],
+  [],
+  [with_dbus=yes])
+
+AS_IF([test "x$with_dbus" != xno],[
+	PKG_CHECK_MODULES([DBUS], [dbus-1 >= 1.2.16])
+	AC_CHECK_LIB([expat], [XML_ParserCreate],
 	     [AC_CHECK_LIB([expat], [XML_StopParser],
 	     		   [AC_SUBST([EXPAT_LIBS], [-lexpat])],
 			   [AC_MSG_ERROR([expat >= 2.0.0 required])])],
-	     [AC_MSG_ERROR([expat library not found])])
+	     [AC_MSG_ERROR([expat library not found])])])
+
+AM_CONDITIONAL([DBUS_SUPPORT], [test "x$with_dbus" != xno])
 
 # Checks for header files.
 AC_CHECK_HEADERS([valgrind/valgrind.h])
