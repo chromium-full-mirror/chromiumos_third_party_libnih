@@ -52,10 +52,17 @@
 		TEST_EQ (pipe (_test_fds), 0);				\
 		TEST_GE ((_pid = fork ()), 0);				\
 		if (_pid > 0) {						\
+			int _ret;					\
 			char _test_address[128] = { 0 };		\
 			close (_test_fds[1]);				\
-			TEST_GT (read (_test_fds[0], _test_address,	\
-				       sizeof (_test_address)), 0);	\
+			_ret = read (_test_fds[0], _test_address,	\
+				     sizeof (_test_address));		\
+			if (_ret == 0) {				\
+				TEST_FAILED ("Unexpected EOF when reading dbus-daemon status"); \
+			} else if (_ret < 0) {				\
+				TEST_FAILED ("Error reading dbus-daemon status: %d, %s", \
+					     errno, strerror (errno));	\
+			}						\
 			close (_test_fds[0]);				\
 									\
 			while (strrchr (_test_address, '\n'))		\
