@@ -55,11 +55,15 @@
 			int _ret;					\
 			char _test_address[128] = { 0 };		\
 			close (_test_fds[1]);				\
-			_ret = read (_test_fds[0], _test_address,	\
-				     sizeof (_test_address));		\
-			if (_ret == 0) {				\
-				TEST_FAILED ("Unexpected EOF when reading dbus-daemon status"); \
-			} else if (_ret < 0) {				\
+			while (1) {					\
+				_ret = read (_test_fds[0],		\
+					     _test_address,		\
+					     sizeof (_test_address));	\
+				if (_ret > 0)				\
+					break;				\
+				TEST_NE (_ret, 0);			\
+				if (errno == EINTR)			\
+					continue;			\
 				TEST_FAILED ("Error reading dbus-daemon status: %d, %s", \
 					     errno, strerror (errno));	\
 			}						\
