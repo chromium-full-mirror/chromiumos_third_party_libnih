@@ -148,6 +148,24 @@ test_path (void)
 
 		nih_free (path);
 	}
+
+
+	/* Check that elements with high-bit characters are escaped
+	 * properly without heap buffer overflow or sign-extension issues.
+	 */
+	TEST_FEATURE ("with high-bit character elements");
+	TEST_ALLOC_FAIL {
+		path = nih_dbus_path (NULL, "/com/netsplit/Nih", "\xc3\xa9", NULL);
+
+		if (test_alloc_failed) {
+			TEST_EQ_P (path, NULL);
+			continue;
+		}
+
+		TEST_EQ_STR (path, "/com/netsplit/Nih/_c3_a9");
+
+		nih_free (path);
+	}
 }
 
 

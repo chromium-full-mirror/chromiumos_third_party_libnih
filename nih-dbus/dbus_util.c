@@ -115,7 +115,7 @@ nih_dbus_path (const void *parent,
 			} else {
 				path[len++] = '_';
 
-				sprintf (path + len, "%02x", *ptr);
+				sprintf (path + len, "%02x", (unsigned char)*ptr);
 				len += 2;
 			}
 		}
